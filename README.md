@@ -13,7 +13,7 @@ This repository contains a pipeline for performing Copy Number Variation (CNV) a
 
 ## Introduction
 
-Copy Number Variations (CNVs) are a form of structural variation where segments of the genome are duplicated or deleted. CNV analysis is essential for understanding genomic diversity and disease mechanisms, especially in cancer. This pipeline automates the process of detecting CNVs from exome sequencing data using GATK's **gCNV** and CNVkit, two robust tools for this purpose.
+Copy Number Variations (CNVs) are a form of structural variation where segments of the genome are duplicated or deleted. CNV analysis is essential for understanding genomic diversity and disease mechanisms, especially in cancer. This pipeline automates the process of detecting CNVs from exome sequencing data using GATK's `**gCNV**` and CNVkit, two robust tools for this purpose.
 
 ## Installation
 
@@ -32,39 +32,40 @@ bash install_tools.sh
 
 This script installs the following tools:
 
-- BWA: For read alignment.
-- SAMtools: For manipulating alignments in BAM format.
-- GATK: For preprocessing and CNV calling.
-- CNVkit: For CNV analysis from exome sequencing data.
-- FastQC: For quality control of sequencing data.
-- MultiQC: For aggregating results from FastQC and other tools.
-- Trimmomatic: For trimming low-quality reads and adapters.
-- Snakemake: For workflow management.
-- ANNOVAR: (Optional, requires manual installation) For annotating CNVs with gene information.
+- **BWA**: For read alignment.
+- **SAMtools**: For manipulating alignments in BAM format.
+- **GATK**: For preprocessing and CNV calling.
+- **CNVkit**: For CNV analysis from exome sequencing data.
+- **FastQC**: For quality control of sequencing data.
+- **MultiQC**: For aggregating results from FastQC and other tools.
+- **Trimmomatic**: For trimming low-quality reads and adapters.
+- **Snakemake**: For workflow management.
+- **ANNOVAR**: (Optional, requires manual installation) For annotating CNVs with gene information.
 
 ## Pipeline Overview
 
 The pipeline includes the following steps:
 
-- Quality Control: Assess the quality of the raw sequencing data using FastQC.
-- Read Alignment: Align reads to a reference genome using BWA and sort the resulting BAM files.Duplicate Marking and Base Quality Score Recalibration: Mark duplicates and recalibrate base quality scores using GATK.
-- CNV Calling using GATK: Use GATK's gCNV module to call CNVs.
-- CNV Calling using CNVkit: An alternative approach for CNV analysis using CNVkit.
-- Visualization: Generate plots for visualizing CNVs using CNVkit.
-- Downstream Analysis: Annotate CNVs with gene information and assess their potential functional impact.
+- **Quality Control**: Assess the quality of the raw sequencing data using FastQC.
+- **Read Alignment**: Align reads to a reference genome using BWA and sort the resulting BAM files.Duplicate Marking and Base Quality Score Recalibration: Mark duplicates and recalibrate base quality scores using GATK.
+- **CNV Calling using GATK**: Use GATK's gCNV module to call CNVs.
+- **CNV Calling using CNVkit**: An alternative approach for CNV analysis using CNVkit.
+- **Visualization**: Generate plots for visualizing CNVs using CNVkit.
+- **Downstream Analysis**: Annotate CNVs with gene information and assess their potential functional impact.
 
 
 ## Running the Pipeline
 
 ### 1. Prepare the Reference Data
 
-Download the necessary reference genome files and exome target regions. Place them in the reference/ directory.
+Download the necessary reference genome files and exome target regions. Place them in the `**reference/**` directory.
 
 ### 2. Organize Your Data
 
-Place your raw sequencing data in the data/ directory. Ensure your data files are named appropriately, for example:
+Place your raw sequencing data in the `**data/**` directory. Ensure your data files are named appropriately, for example:
 
 `sample_R1.fastq.gz`
+
 `sample_R2.fastq.gz`
 
 ### 3. Run Snakemake
@@ -79,7 +80,7 @@ This command will execute all steps in the workflow, utilizing 8 cores.
 
 ### 4. Output
 
-The results will be saved in the results/ directory, organized by step.
+The results will be saved in the `**results/**` directory, organized by step.
 
 ## Detailed Workflow Explanation
 
@@ -87,30 +88,30 @@ The results will be saved in the results/ directory, organized by step.
 
 Quality control is essential to ensure the raw sequencing data is of sufficient quality for downstream analysis.
 
-- FastQC generates reports on various quality metrics for each FASTQ file.
-- MultiQC aggregates these reports into a single HTML report for easier interpretation.
+- **FastQC** generates reports on various quality metrics for each FASTQ file.
+- **MultiQC** aggregates these reports into a single HTML report for easier interpretation.
 
 ### Step 2: Read Alignment
 
 Reads are aligned to a reference genome using BWA-MEM. The aligned reads are then sorted using SAMtools.
 
-- BWA-MEM aligns the reads to the reference genome.
-- SAMtools is used to sort the resulting BAM files and create index files.
+- **BWA-MEM** aligns the reads to the reference genome.
+- **SAMtools** is used to sort the resulting BAM files and create index files.
 
 ### Step 3: Duplicate Marking and Base Quality Score Recalibration
 
 These steps are crucial to improve the accuracy of variant calling:
 
-- GATK MarkDuplicates identifies and marks duplicate reads.
-- GATK BaseRecalibrator adjusts base quality scores based on known variant sites, improving the accuracy of subsequent analyses.
+- **GATK MarkDuplicates** identifies and marks duplicate reads.
+- **GATK BaseRecalibrator** adjusts base quality scores based on known variant sites, improving the accuracy of subsequent analyses.
 
 ### Step 4: CNV Calling using GATK
 
 GATK's gCNV module is used to detect CNVs:
 
-- PreprocessIntervals creates an interval list from the exome capture kit.
-- DenoiseReadCounts normalizes the read counts using a panel of normals (PON).
--  CallCopyRatioSegments calls CNVs based on the normalized data.
+- **PreprocessIntervals** creates an interval list from the exome capture kit.
+- **DenoiseReadCounts** normalizes the read counts using a panel of normals (PON).
+- **CallCopyRatioSegments** calls CNVs based on the normalized data.
 
 ### Step 5: CNV Calling using CNVkit
 
@@ -132,15 +133,15 @@ CNVkit can generate visualizations for easier interpretation of CNV data:
 
 The CNV results can be further analyzed to assess their biological significance:
 
-- Gene Annotation: Annotate CNVs with gene information using tools like ANNOVAR or CNVkit's built-in gene annotation functionality.
-- Functional Impact: Assess the potential functional impact of the identified CNVs, especially if they overlap with known cancer-related genes.
+- **Gene Annotation**: Annotate CNVs with gene information using tools like ANNOVAR or CNVkit's built-in gene annotation functionality.
+- **Functional Impact**: Assess the potential functional impact of the identified CNVs, especially if they overlap with known cancer-related genes.
 
 ## References
 
-- GATK: [GATK Documentation](https://gatk.broadinstitute.org/)
-- CNVkit: [CNVkit Documentation](https://cnvkit.readthedocs.io/en/stable/)
-- BWA: [BWA Documentation](http://bio-bwa.sourceforge.net/)
-- SAMtools: [SAMtools Documentation](http://www.htslib.org/)
-- FastQC: [FastQC Documentation](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
-- MultiQC: [MultiQC Documentation](https://multiqc.info/)
-- Trimmomatic: [Trimmomatic Documentation](http://www.usadellab.org/cms/?page=trimmomatic)
+- **GATK**: [GATK Documentation](https://gatk.broadinstitute.org/)
+- **CNVkit**: [CNVkit Documentation](https://cnvkit.readthedocs.io/en/stable/)
+- **BWA**: [BWA Documentation](http://bio-bwa.sourceforge.net/)
+- **SAMtools**: [SAMtools Documentation](http://www.htslib.org/)
+- **FastQC**: [FastQC Documentation](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+- **MultiQC**: [MultiQC Documentation](https://multiqc.info/)
+- **Trimmomatic**: [Trimmomatic Documentation](http://www.usadellab.org/cms/?page=trimmomatic)
