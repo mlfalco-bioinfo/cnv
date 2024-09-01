@@ -48,7 +48,7 @@ pip3 install snakemake
 
 # Install HTSlib (SAMtools dependency)
 echo "Installing HTSlib..."
-HTSLIB_VERSION="1.2"
+HTSLIB_VERSION="1.20"
 wget https://github.com/samtools/htslib/releases/download/$HTSLIB_VERSION/htslib-$HTSLIB_VERSION.tar.bz2
 tar -xvjf htslib-$HTSLIB_VERSION.tar.bz2
 cd htslib-$HTSLIB_VERSION
