@@ -64,8 +64,8 @@ Download the necessary reference genome files and exome target regions. Place th
 
 Place your raw sequencing data in the data/ directory. Ensure your data files are named appropriately, for example:
 
- `sample_R1.fastq.gz`
- sample_R2.fastq.gz`
+`sample_R1.fastq.gz`
+`sample_R2.fastq.gz`
 
 ### 3. Run Snakemake
 
