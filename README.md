@@ -137,10 +137,10 @@ The CNV results can be further analyzed to assess their biological significance:
 
 ## References
 
-- GATK: GATK Documentation
-- CNVkit: CNVkit Documentation
-- BWA: BWA Documentation
-- SAMtools: SAMtools Documentation
-- FastQC: FastQC Documentation
-- MultiQC: MultiQC Documentation
-- Trimmomatic: Trimmomatic Documentation
+- GATK: [GATK Documentation](https://gatk.broadinstitute.org/)
+- CNVkit: [CNVkit Documentation](https://cnvkit.readthedocs.io/en/stable/)
+- BWA: [BWA Documentation](http://bio-bwa.sourceforge.net/)
+- SAMtools: [SAMtools Documentation](http://www.htslib.org/)
+- FastQC: [FastQC Documentation](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+- MultiQC: [MultiQC Documentation](https://multiqc.info/)
+- Trimmomatic: [Trimmomatic Documentation](http://www.usadellab.org/cms/?page=trimmomatic)
