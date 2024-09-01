@@ -26,8 +26,10 @@ Copy Number Variations (CNVs) are a form of structural variation where segments 
 
 To install all the necessary tools, run the following script:
 
-```bash
+```
 bash install_tools.sh
+
+```
 
 This script installs the following tools:
 
@@ -61,16 +63,17 @@ Download the necessary reference genome files and exome target regions. Place th
 
 Place your raw sequencing data in the data/ directory. Ensure your data files are named appropriately, for example:
 
-    sample_R1.fastq.gz
-    sample_R2.fastq.gz
+    'sample_R1.fastq.gz'
+    'sample_R2.fastq.gz'
 
 3. Run Snakemake
 
 Execute the pipeline with the following command:
 
-bash
 
+```
 snakemake --cores 8
+``
 
 This command will execute all steps in the workflow, utilizing 8 cores.
 4. Output
