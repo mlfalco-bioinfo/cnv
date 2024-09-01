@@ -13,7 +13,7 @@ This repository contains a pipeline for performing Copy Number Variation (CNV) a
 
 ## Introduction
 
-Copy Number Variations (CNVs) are a form of structural variation where segments of the genome are duplicated or deleted. CNV analysis is essential for understanding genomic diversity and disease mechanisms, especially in cancer. This pipeline automates the process of detecting CNVs from exome sequencing data using GATK's `**gCNV**` and CNVkit, two robust tools for this purpose.
+Copy Number Variations (CNVs) are a form of structural variation where segments of the genome are duplicated or deleted. CNV analysis is essential for understanding genomic diversity and disease mechanisms, especially in cancer. This pipeline automates the process of detecting CNVs from exome sequencing data using GATK's `gCNV` and CNVkit, two robust tools for this purpose.
 
 ## Installation
 
@@ -58,11 +58,11 @@ The pipeline includes the following steps:
 
 ### 1. Prepare the Reference Data
 
-Download the necessary reference genome files and exome target regions. Place them in the `**reference/**` directory.
+Download the necessary reference genome files and exome target regions. Place them in the `reference/` directory.
 
 ### 2. Organize Your Data
 
-Place your raw sequencing data in the `**data/**` directory. Ensure your data files are named appropriately, for example:
+Place your raw sequencing data in the `data/` directory. Ensure your data files are named appropriately, for example:
 
 `sample_R1.fastq.gz`
 
@@ -80,7 +80,7 @@ This command will execute all steps in the workflow, utilizing 8 cores.
 
 ### 4. Output
 
-The results will be saved in the `**results/**` directory, organized by step.
+The results will be saved in the `results/` directory, organized by step.
 
 ## Detailed Workflow Explanation
 
@@ -117,10 +117,10 @@ GATK's gCNV module is used to detect CNVs:
 
 CNVkit provides an alternative approach to CNV analysis:
 
-- CNVkit coverage calculates the coverage in target regions.
-- CNVkit reference creates a reference profile using normal samples.
-- CNVkit fix normalizes the sample data against the reference.
-- CNVkit segment identifies CNVs by segmenting the data.
+- **CNVkit** coverage calculates the coverage in target regions.
+- **CNVkit** reference creates a reference profile using normal samples.
+- **CNVkit** fix normalizes the sample data against the reference.
+- **CNVkit** segment identifies CNVs by segmenting the data.
 
 ### Step 6: Visualization
 
