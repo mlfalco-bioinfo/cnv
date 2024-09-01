@@ -14,7 +14,7 @@ sudo apt-get install -y samtools
 
 # Install GATK
 echo "Installing GATK..."
-GATK_VERSION="4.3.0.0"
+GATK_VERSION="4.6.0.0"
 wget https://github.com/broadinstitute/gatk/releases/download/$GATK_VERSION/gatk-$GATK_VERSION.zip
 unzip gatk-$GATK_VERSION.zip
 sudo mv gatk-$GATK_VERSION /usr/local/gatk
