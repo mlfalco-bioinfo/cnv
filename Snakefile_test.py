@@ -11,6 +11,7 @@ SAMPLES = [
     sample.split("_R1")[0]
     for sample in sorted(glob.glob(f"{DATA_DIR}/{{sample}}_R1.fastq.gz"))
 ]
+
 # Step 1: Quality Control (FastQC)
 rule fastqc:
     """
@@ -24,7 +25,8 @@ rule fastqc:
         R2_out = f"{RESULTS_DIR}/fastqc/{{sample}}_R2_fastqc.html"
     shell:
         "fastqc {input.R1} {input.R2} -o {RESULTS_DIR}/fastqc"
-        # Step 2: Alignment (BWA mem)
+        
+# Step 2: Alignment (BWA mem)
 rule bwa_mem:
     """
     Align sequencing reads to a reference genome using BWA mem.
@@ -44,7 +46,6 @@ rule bwa_mem:
         samtools sort -o {output.bam}
         """
 
-
 rule index_bam:
     """
     Index the sorted BAM file for efficient access.
@@ -55,7 +56,8 @@ rule index_bam:
         bai = f"{RESULTS_DIR}/aligned/{{sample}}_sorted.bam.bai"
     shell:
         "samtools index {input.bam}"
-        # Step 3: Mark Duplicates and Base Quality Score Recalibration (BQSR)
+        
+# Step 3: Mark Duplicates and Base Quality Score Recalibration (BQSR)
 rule mark_duplicates:
     """
     Identify and remove duplicate reads in the BAM file.
@@ -67,7 +69,6 @@ rule mark_duplicates:
         metrics = f"{RESULTS_DIR}/gatk/{{sample}}_metrics.txt"
     shell:
         "gatk MarkDuplicates -I {input.bam} -O {output.dedup_bam} -M {output.metrics}"
-
 
 rule base_recalibration:
     """
@@ -85,6 +86,7 @@ rule base_recalibration:
         gatk BaseRecalibrator -I {input.bam} -R {input.ref} --known-sites {input.known_sites} -O {output.recal_data}
         gatk ApplyBQSR -R {input.ref} -I {input.bam} --bqsr-recal-file {output.recal_data} -O {output.bam_out}
         """
+
 # Step 4: CNV Calling with GATK
 rule preprocess_intervals:
     """
@@ -98,7 +100,6 @@ rule preprocess_intervals:
     shell:
         "gatk PreprocessIntervals -R {input.ref} -L {input.targets} -imr OVERLAPPING_ONLY -O {output.intervals}"
 
-
 rule denoise_counts:
     """
     Denoise read counts using GATK DenoiseReadCounts.
@@ -111,7 +112,6 @@ rule denoise_counts:
         denoised = f"{RESULTS_DIR}/gatk/{{sample}}.denoisedCR.tsv"
     shell:
         "gatk DenoiseReadCounts -I {input.counts} --standardized-copy-ratios {output.standardized} --denoised-copy-ratios {output.denoised} --count-panel-of-normals {input.pon}"
-
 
 rule call_segments:
     """
