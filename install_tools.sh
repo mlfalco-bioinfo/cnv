@@ -35,7 +35,7 @@ pip3 install multiqc
 
 # Install Trimmomatic
 echo "Installing Trimmomatic..."
-TRIMMOMATIC_VERSION="0.39"
+TRIMMOMATIC_VERSION="0.4"
 wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/$TRIMMOMATIC_VERSION/Trimmomatic-$TRIMMOMATIC_VERSION.zip
 unzip Trimmomatic-$TRIMMOMATIC_VERSION.zip
 sudo mv Trimmomatic-$TRIMMOMATIC_VERSION /usr/local/Trimmomatic
@@ -48,7 +48,7 @@ pip3 install snakemake
 
 # Install HTSlib (SAMtools dependency)
 echo "Installing HTSlib..."
-HTSLIB_VERSION="1.15.1"
+HTSLIB_VERSION="1.2"
 wget https://github.com/samtools/htslib/releases/download/$HTSLIB_VERSION/htslib-$HTSLIB_VERSION.tar.bz2
 tar -xvjf htslib-$HTSLIB_VERSION.tar.bz2
 cd htslib-$HTSLIB_VERSION
